@@ -7,4 +7,5 @@ app.config.from_object(Config)
 from app.api import bp as api_bp
 app.register_blueprint(api_bp, url_prefix='/api')
 
-from app import routes, models
+from app.main import routes
+from app import models

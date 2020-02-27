@@ -12,14 +12,12 @@ def api_upload_file():
 	data = request.files['file'] or {}
 	file = File(data)
 
-	if file.type == "text/plain":
-		file.txt_content()
-	elif file.type == "application/pdf":
-		file.pdf_content()
-	elif file.type == "text/csv":
-		file.csv_content()
-	elif file.type in ["image/jpeg", "image/png", "image/gif"]:
-		file.image_content()
+	if file.type in ["text/plain", "text/csv"]:
+		file.txt_content(data)
+	elif file.type in ["application/pdf", "image/jpeg", "image/png", "image/gif"]:
+		file.base64_content(data)
+	elif file.type in ["application/json"]:
+		file.json_content(data)
 	else :
 		file.not_supported_file_content()
 

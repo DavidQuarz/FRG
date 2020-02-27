@@ -1,1 +1,5 @@
-{"file":"b'  PID TTY           TIME CMD\\n 4829 ttys000    0:00.05 -bash\\n\\n'","name":"txt","type":"application/octet-stream"}
+{
+"file":"b'  PID TTY           TIME CMDn 4829 ttys000    0:00.05 -bash\\n\\n'",
+"name":"txt",
+"type":"application/octet-stream"
+}

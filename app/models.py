@@ -1,3 +1,7 @@
+import base64, pprint
+from io import StringIO
+from flask import request, jsonify
+
 class File:
 	
 	def __init__(self, file):
@@ -8,29 +12,20 @@ class File:
 	def __repr__(self):
 		return '<File: {}; Type: {}; Size: {}>'.format(self.name, self.type, self.size)
 
-	def meta_data(self):
-		output = {
-			'name' : self.name,
-			'type' : self.type,
-			'size' : self.size,
-			'content' : self.content
-		}
-		return output
-
-	def txt_content(self):
-		self.content = "1"
+	def txt_content(self, file):
+		stream = file.read().decode("utf-8")
+		self.content = stream
 		return self.content
 
-	def pdf_content(self):
-		self.content = "2"
+	def base64_content(self, file):
+		image_string = base64.b64encode(file.read())
+		image_string = image_string.decode('utf-8')
+		self.content = image_string
 		return self.content
 
-	def csv_content(self):
-		self.content = "3"
-		return self.content
-
-	def image_content(self):
-		self.content = "4"
+	def json_content(self, file):
+		stream = file.read().decode("utf-8")
+		self.content = stream
 		return self.content
 
 	def not_supported_file_content(self):
@@ -38,7 +33,12 @@ class File:
 		return self.content
 
 	def to_json(self):
-		output = self.meta_data()
+		output = {
+			'name' : self.name,
+			'type' : self.type,
+			'size' : self.size,
+			'content' : self.content
+		}
 		return output
 
 def get_size(fobj):
