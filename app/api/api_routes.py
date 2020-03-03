@@ -1,7 +1,8 @@
 from app.api import bp
-from flask import jsonify, request, url_for
-from app.models import File, get_size
-import pprint, os, csv
+from flask import jsonify, request, Response, url_for
+from app.models import File
+import pprint, os, csv, json, boto3
+from io import BytesIO
 
 @bp.route('/')
 def api_get_file():
@@ -23,4 +24,8 @@ def api_upload_file():
 
 	reponse = jsonify(file.to_json())
 	reponse.status_code = 201
+
+	s3 = boto3.client('s3')
+	s3.upload_fileobj(BytesIO(json.dumps(Response.get_json(reponse), sort_keys=True, indent=4).encode('utf-8')), 'bucketdemarde', file.name+'.json')
+
 	return reponse
