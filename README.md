@@ -43,3 +43,7 @@ sls deploy
 ```
 
 ## Stockage sur S3
+- Se connecter sur AWS > IAM > Rôles
+- Filtrer sur le nom du service du fichier yml : ici "serverless-FRG"
+- Sélectionner le rôle correspondant au serverless déployé
+- Attacher la stratégie "AmazonS3FullAccess"

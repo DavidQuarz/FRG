@@ -38,6 +38,12 @@ functions:
 
     handler: wsgi_handler.handler
 
+    iamRoleStatements:
+      - Effect: Allow
+        Action:
+          - s3:PutObject
+        Resource: "arn:aws:s3:::Bucketdemarde"
+
     events:
 
       - http: ANY /

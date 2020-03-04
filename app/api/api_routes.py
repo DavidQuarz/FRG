@@ -25,6 +25,7 @@ def api_upload_file():
 	reponse = jsonify(file.to_json())
 	reponse.status_code = 201
 
+	#Stockage du fichier json dans S3
 	s3 = boto3.client('s3')
 	s3.upload_fileobj(BytesIO(json.dumps(Response.get_json(reponse), sort_keys=True, indent=4).encode('utf-8')), 'bucketdemarde', file.name+'.json')
 
