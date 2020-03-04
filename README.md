@@ -43,7 +43,11 @@ sls deploy
 ```
 
 ## Stockage sur S3
-- Se connecter sur AWS > IAM > Rôles
-- Filtrer sur le nom du service du fichier yml : ici "serverless-FRG"
-- Sélectionner le rôle correspondant au serverless déployé
-- Attacher la stratégie "AmazonS3FullAccess"
+Pour permettre à lambda d'accéder à s3, il est nécessaire de rajouter en plus dans le fichier serverless.yml (si ce n'est pas déjà fait) sous "provider"
+
+provider:
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - s3:PutObject
+      Resource: 'arn:aws:s3:::bucketdemarde/*'

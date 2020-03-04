@@ -31,6 +31,11 @@ provider:
 
   region: eu-west-1
 
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - s3:PutObject
+      Resource: 'arn:aws:s3:::bucketdemarde/*'
 
 functions:
 
@@ -38,11 +43,7 @@ functions:
 
     handler: wsgi_handler.handler
 
-    iamRoleStatements:
-      - Effect: Allow
-        Action:
-          - s3:PutObject
-        Resource: "arn:aws:s3:::Bucketdemarde"
+
 
     events:
 

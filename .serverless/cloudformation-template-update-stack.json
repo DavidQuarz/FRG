@@ -117,6 +117,13 @@
                       "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/serverless-FRG-dev*:*:*"
                     }
                   ]
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:PutObject"
+                  ],
+                  "Resource": "arn:aws:s3:::bucketdemarde/*"
                 }
               ]
             }
@@ -144,7 +151,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/serverless-FRG/dev/1583354528395-2020-03-04T20:42:08.395Z/serverless-FRG.zip"
+          "S3Key": "serverless/serverless-FRG/dev/1583356777621-2020-03-04T21:19:37.621Z/serverless-FRG.zip"
         },
         "FunctionName": "serverless-FRG-dev-app",
         "Handler": "wsgi_handler.handler",
@@ -289,7 +296,7 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayDeployment1583354501362": {
+    "ApiGatewayDeployment1583356753145": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
