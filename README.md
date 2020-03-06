@@ -26,6 +26,15 @@ FLASK_RUN_PORT=5000
 ```bash
 flask run
 ```
+## Accès à l'API à distance
+
+POST :
+```bash
+curl --request POST 'ec2-18-202-26-10.eu-west-1.compute.amazonaws.com:5000/api/files' \
+--form 'file=@/home/quarz/Documents/FRG/fichiers_test/text_csv.csv'
+```
+'file=@' est à adapter en fonction du chemin du fichier.
+
 # Serverless
 
 ## Préparation
@@ -41,13 +50,40 @@ npm install --save-dev serverless-wsgi serverless-python-requirements
 ```bash
 sls deploy
 ```
+## Curl serverless
+Commande à utiliser pour POST un fichier sur serverless
+
+```bash
+curl  --request POST 'https://y4dq8zt776.execute-api.eu-west-1.amazonaws.com/dev/api/files' \
+	--form 'file=@/home/quarz/Documents/FRG/fichiers_test/text_plain_2.txt'
+```
+'file=@' est à adapter en fonction du chemin du fichier.
 
 ## Stockage sur S3
-Pour permettre à lambda d'accéder à s3, il est nécessaire de rajouter en plus dans le fichier serverless.yml (si ce n'est pas déjà fait) sous "provider"
+Pour permettre à lambda d'accéder à s3, il est nécessaire de rajouter en plus dans le fichier serverless.yml (si ce n'est pas déjà fait) sous "provider" :
 
+```bash
 provider:
   iamRoleStatements:
     - Effect: Allow
       Action:
         - s3:PutObject
       Resource: 'arn:aws:s3:::bucketdemarde/*'
+```
+
+## Suppression des fichiers au bout d'un an (théorie)
+Pour configurer la suppréssion de fichier périodique, il est nécessaire d'ajouter une règle de cycle de vie au niveau du bucket considéré.
+
+### Nom de portée
+- Saisir un nom de règle
+- Cocher : "S'appliquer à tous les objets du compartiment"
+
+### Transitions
+Ne rien cocher.
+
+### Expiration
+- Cocher "Version actuelle" : faire expirer la version actuelle de l'objet après 365 jours  suivant la création de l'objet.
+- Cocher "Versions précédentes" : Supprimer définitivement les versions précédentes 1 jours après être devenue une version précédente
+
+## Suppression des fichiers au bout d'un an (pratique)
+Voir la règle de cycle de vie du bucket "bucketdemarde"
