@@ -1,0 +1,42 @@
+swagger: "2.0"
+info:
+  description: "API documentation. Including FRG, SOA, AWS"
+  version: "1.0.0"
+  title: "File JSON Convertor"
+  contact:
+    email: "david.tia@student-cs.fr.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+tags:
+- name: "Convert to JSON"
+  description: "Everything about your Pets"
+  externalDocs:
+    description: "Find out more"
+    url: "http://swagger.io"
+schemes:
+- "http"
+paths:
+  /api/files:
+    post:
+      tags:
+      - "Convert to JSON"
+      summary: "uploads a file and convert it to JSON"
+      description: ""
+      operationId: "uploadFile"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "file"
+        in: "formData"
+        description: "file to upload"
+        required: false
+        type: "file"
+      responses:
+        200:
+          description: "successful operation"
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"

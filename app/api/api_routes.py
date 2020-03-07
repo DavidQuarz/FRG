@@ -6,7 +6,7 @@ from io import BytesIO
 
 @bp.route('/')
 def api_get_file():
-	return "Hello World!"
+	return "Hello World"
 
 @bp.route('/files', methods=['POST'])
 def api_upload_file():
