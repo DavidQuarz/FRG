@@ -7,13 +7,13 @@
 python3 -m venv venv
 source venv/bin/activate
 ```
-- Installer les prérequis
+- Installer les prérequis.
 
 ```bash
 pip install -r requirements.txt
 ```
 
-- Modifier les variables d'environnement dans le fichier .flaskenv
+- S'assurer que les variables d'environnement dans le fichier .flaskenv sont bien définies telles que ci-dessous, les modifier sinon.
 
 ```bash
 FLASK_APP=frg.py
@@ -30,10 +30,10 @@ flask run
 
 POST :
 ```bash
-curl --request POST 'ec2-18-202-26-10.eu-west-1.compute.amazonaws.com:5000/api/files' \
+curl --request POST '<instance-adresse-DNS-public-IPv4)>/api/files' \
 --form 'file=@/home/quarz/Documents/FRG/fichiers_test/text_csv.csv'
 ```
-'file=@' est à adapter en fonction du chemin du fichier.
+'file=@' est à adapter en fonction du chemin du fichier. Différents formats de fichiers sont accessibles dans le répertoire FRG/fichiers_test/.
 
 # Serverless
 

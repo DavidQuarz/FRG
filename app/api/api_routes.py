@@ -13,17 +13,26 @@ def api_upload_file():
 	data = request.files['file'] or {}
 	file = File(data)
 
-	if file.type in ["text/plain", "text/csv"]:
+	content_accepted = True
+
+	if file.type in ["text/plain"]:
 		file.txt_content(data)
+	elif file.type in ["text/csv"]:
+		file.csv_content(data)
 	elif file.type in ["application/pdf", "image/jpeg", "image/png", "image/gif"]:
 		file.base64_content(data)
 	elif file.type in ["application/json"]:
 		file.json_content(data)
 	else :
 		file.not_supported_file_content()
+		content_accepted = False
 
 	reponse = jsonify(file.to_json())
-	reponse.status_code = 201
+	if content_accepted:
+		reponse.status_code = 201
+	else :
+		reponse.status_code = 415
+
 
 	#Stockage du fichier json dans S3
 	s3 = boto3.client('s3')

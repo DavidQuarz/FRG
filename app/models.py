@@ -1,4 +1,5 @@
-import base64, pprint
+import base64, csv, pprint, json
+from collections import OrderedDict
 from io import StringIO
 from flask import request, jsonify
 
@@ -27,9 +28,15 @@ class File:
 		self.content = image_string
 		return self.content
 
+	def csv_content(self, file):
+		stream = file.read().decode("utf-8")
+		csv_content = [{k: v for k, v in row.items()} for row in csv.DictReader(stream.splitlines(), skipinitialspace=True)]
+		self.content = csv_content
+		return self.content
+
 	def json_content(self, file):
 		stream = file.read().decode("utf-8")
-		self.content = stream
+		self.content = json.loads(stream, object_pairs_hook=OrderedDict)
 		return self.content
 
 	def not_supported_file_content(self):
