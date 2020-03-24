@@ -5,7 +5,12 @@
 
 ```bash
 python3 -m venv venv
+
+# Ubuntu command
 source venv/bin/activate
+
+# FreeBSD command
+. venv/bin/activate
 ```
 - Installer les prérequis.
 
@@ -30,7 +35,7 @@ flask run
 
 POST :
 ```bash
-curl --request POST '<instance-adresse-DNS-public-IPv4)>/api/files' \
+curl --request POST '<instance-adress-DNS-public-IPv4)>:5000/api/files' \
 --form 'file=@/home/quarz/Documents/FRG/fichiers_test/text_csv.csv'
 ```
 'file=@' est à adapter en fonction du chemin du fichier. Différents formats de fichiers sont accessibles dans le répertoire FRG/fichiers_test/.
@@ -87,3 +92,15 @@ Ne rien cocher.
 
 ## Suppression des fichiers au bout d'un an (pratique)
 Voir la règle de cycle de vie du bucket "bucketdemarde"
+
+# SOA
+## Prérequis
+
+Lancer flask : voir § FRG.
+
+## Accès à Swagger
+
+Swagger est accessible à l'adresse suivante :
+
+\[instance-adress-DNS-public-IPv4)\]:5000/swagger
+

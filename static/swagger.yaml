@@ -10,7 +10,7 @@ info:
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
 tags:
 - name: "Convert to JSON"
-  description: "Everything about your Pets"
+  description: "Supported format : .txt, .csv, .json, .pdf, .png, .jpeg, .gif"
   externalDocs:
     description: "Find out more"
     url: "http://swagger.io"
@@ -37,6 +37,8 @@ paths:
       responses:
         200:
           description: "successful operation"
+        415:
+          description: "supported media type"
 externalDocs:
   description: "Find out more about Swagger"
   url: "http://swagger.io"
