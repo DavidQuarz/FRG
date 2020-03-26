@@ -65,3 +65,8 @@ def get_size(fobj):
 		pass
 	    # in-memory file object that doesn't support seeking or tell
 	return 0  #assume small enough
+
+def get_mimetype(data: bytes) -> str:
+    """Get the mimetype from file data."""
+    f = magic.Magic(mime=True)
+    return f.from_buffer(data)

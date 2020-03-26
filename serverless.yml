@@ -21,6 +21,15 @@ custom:
     dockerizePip: non-linux
 
 
+package:
+
+  exclude:
+
+    - node_modules/**
+    
+    - venv/**
+
+
 provider:
 
   name: aws
@@ -35,7 +44,7 @@ provider:
     - Effect: Allow
       Action:
         - s3:PutObject
-      Resource: 'arn:aws:s3:::bucketdemarde/*'
+      Resource: 'arn:aws:s3:::bucket_FRG/*'
 
 functions:
 

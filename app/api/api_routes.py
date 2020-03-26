@@ -36,6 +36,8 @@ def api_upload_file():
 
 	#Stockage du fichier json dans S3
 	s3 = boto3.client('s3')
-	s3.upload_fileobj(BytesIO(json.dumps(Response.get_json(reponse), sort_keys=True, indent=4).encode('utf-8')), 'bucketdemarde', file.name+'.json')
+	file_to_s3 = BytesIO(json.dumps(Response.get_json(reponse), sort_keys=True, indent=4).encode('utf-8'))
+	
+	s3.upload_fileobj(file_to_s3, 'bucket_FRG', file.name+'.json')
 
 	return reponse

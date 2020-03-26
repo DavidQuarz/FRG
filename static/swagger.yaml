@@ -35,7 +35,7 @@ paths:
         required: false
         type: "file"
       responses:
-        200:
+        201:
           description: "successful operation"
         415:
           description: "supported media type"
