@@ -36,8 +36,19 @@ def api_upload_file():
 
 	#Stockage du fichier json dans S3
 	s3 = boto3.client('s3')
+	buckets = s3.list_buckets()
+	bucket_FRG = 'bucket-frg'
+	
+	existing_bucket = False
+	for bucket in buckets['Buckets']:
+		if bucket_FRG == bucket["Name"]:
+			existing_bucket = True
+
+	if not existing_bucket:
+		s3.create_bucket(Bucket=bucket_FRG, CreateBucketConfiguration={'LocationConstraint':'eu-west-1'})
+
 	file_to_s3 = BytesIO(json.dumps(Response.get_json(reponse), sort_keys=True, indent=4).encode('utf-8'))
 	
-	s3.upload_fileobj(file_to_s3, 'bucket_FRG', file.name+'.json')
+	s3.upload_fileobj(file_to_s3, bucket_FRG, file.name+'.json')
 
 	return reponse
